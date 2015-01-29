@@ -1,10 +1,45 @@
 <DOCTYPE html>
-<html>
+<html ng-app="parseQ">
 <head>
 	<title>ParseQ</title>
+	<link rel="stylesheet" href="main.css" />
 </head>
-<body>
+<body ng-controller="MainController">
+
+<input class="question-input" type="text" ng-model="question" placeholder="Question" />
+<button class="btn btn-default" ng-click="postData()">Submit</button>
+
+
+<hr>
+
+<div class="main-view">
+	
+	<div class="question-container">
+	<p>In Queue</p>
+	<hr>
+		<div class="question" ng-repeat="question in questions | filter:{ status: 'red'}">
+			<p>{{question.question}}</p>
+			<button class="btn btn-resize" ng-click="updateData(question.objectId)">Help
+			</button>
+		</div>
+	</div>
+
+	<div class="question-container">
+		<p>Being Helped</p>
+		<hr>
+		<div class="question" ng-repeat="question in questions | filter:{ status: 'yellow'}">
+		<p>{{question.question}}</p>
+		<button class="btn btn-resize" ng-click="deleteData(question.objectId)">Delete</button>
+		</div>
+	</div>
+</div>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/defaultHeaders.js"></script>
+<script src="js/controllers/MainController.js"></script>
+<script src="js/services/parseService.js"></script>
+<script src="js/myDirectives.js"></script>
+
 </body>
 </html>
